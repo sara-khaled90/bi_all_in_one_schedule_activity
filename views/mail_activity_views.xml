@@ -1,0 +1,421 @@
+<?xml version='1.0' encoding='UTF-8'?>
+  <odoo>
+
+    
+
+    <record id="res_config_settings_view_form_inherit_activity" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='companies']" position="after">
+                <div id="activity">
+                    <h2>Schedule Activity</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="group_multi_user_activity"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Allow multi users to schedule activity" for="group_multi_user_activity"/>
+                                <div class="text-muted">
+                                    Allow multi users to schedule activity
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="group_multi_company_activity"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Allow Multi Company" for="group_multi_company_activity"/>
+                                <div class="text-muted">
+                                    Allow multi company to schedule activity
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="due_activity_notification">
+                    <h2>Due Activity Notification</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="due_activity_notification"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label string="Due Activity Notification" for="due_activity_notification"/>
+                                <div class="text-muted">
+                                    Set options to true and enter notification days
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="padding: 0;">
+                            <div class="col-12 col-lg-12 o_setting_box" attrs="{'invisible': [('due_activity_notification', '=', False)]}">
+                                <div class="o_setting_left_pane">
+                                    <field name="on_due_date"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label string="On Due Date" for="on_due_date"/>
+                                    <div class="text-muted">
+                                        Send notification to activity assigned user Before/After due date. (Min 1, Max 6 Days)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 o_setting_box" attrs="{'invisible': ['|',('due_activity_notification', '=', False),('on_due_date', '=', False)]}">
+                                <div class="o_setting_left_pane">
+                                    <field name="days_after_due_date"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div style="width:50px;display:inline-block;" attrs="{'invisible': [('days_after_due_date', '=', False)]}">
+                                        <field name="days_after_due_day"/>
+                                    </div>
+                                    <label string="Days After Due Date" for="days_after_due_date"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 o_setting_box" attrs="{'invisible': ['|',('due_activity_notification', '=', False),('on_due_date', '=', False)]}">
+                                <div class="o_setting_left_pane">
+                                    <field name="days_before_due_date"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div style="width:50px;display:inline-block;" attrs="{'invisible': [('days_before_due_date', '=', False)]}">
+                                        <field name="days_before_due_day"/>
+                                    </div>
+                                    <label string="Days Before Due Date" for="days_before_due_date"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="padding: 0;">
+                            <div class="col-12 col-lg-12 o_setting_box" attrs="{'invisible': [('due_activity_notification', '=', False)]}">
+                                <div class="o_setting_left_pane">
+                                    <field name="notify_create_user"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label string="Notify Create User" for="notify_create_user"/>
+                                    <div class="text-muted">
+                                        Send notification to activity created user Before/After due date. (Min 1, Max 6 Days)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 o_setting_box" attrs="{'invisible': ['|',('due_activity_notification', '=', False),('notify_create_user', '=', False)]}">
+                                <div class="o_setting_left_pane">
+                                    <field name="days_after_due_date_create"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div style="width:50px;display:inline-block;" attrs="{'invisible': [('days_after_due_date_create', '=', False)]}">
+                                        <field name="days_after_due_day_create"/>
+                                    </div>
+                                    <label string="Days After Due Day" for="days_after_due_date_create"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 o_setting_box" attrs="{'invisible': ['|',('due_activity_notification', '=', False),('notify_create_user', '=', False)]}">
+                                <div class="o_setting_left_pane">
+                                    <field name="days_before_due_date_create"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div style="width:50px;display:inline-block;" attrs="{'invisible': [('days_before_due_date_create', '=', False)]}">
+                                        <field name="days_before_due_day_create"/>
+                                    </div>
+                                    <label string="Days Before Due Day" for="days_before_due_date_create"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_activity_tags_tree" model="ir.ui.view">
+            <field name="name">view.activity.tags.tree</field>
+            <field name="model">activity.tags</field>
+            <field name="arch" type="xml">
+                <tree string="Activity Tags">
+                   <field name="name" />
+                   <field name="color" invisible="1" />
+                </tree> 
+            </field>
+    </record>
+
+    <record id="view_activity_tags_form" model="ir.ui.view">
+            <field name="name">view.activity.tags.form</field>
+            <field name="model">activity.tags</field>
+            <field name="arch" type="xml">
+                <form string="Activity Tags">
+                    <sheet>
+                        <group col="4">
+                           <field name="name" />
+                           <field name="color" invisible="1" />
+                        </group>
+                    </sheet>
+                </form> 
+            </field>
+    </record>
+
+
+    <record id="mail_activity_tree_inherit" model="ir.ui.view">
+        <field name="name">mail.activity.tree.inherit</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_tree"/>
+        <field name="arch" type="xml">
+
+            <tree position="attributes">
+                    <attribute name="create">1</attribute>
+            </tree>
+
+            <field name="date_deadline" position="after">
+                <field name="state" string="Status"></field>
+                <field name="company" groups="base.group_multi_company"></field>
+                <field name="date_completion" string="Completion Date"></field>
+                <field name="activity_feedback"/>
+                <field name="activity_tags_id" string="Activity Tags" widget="many2many_tags" options="{'color_field': 'color'}"></field>
+            </field>
+        </field>
+    </record>
+
+    <record id="mail_activity_form_inherit" model="ir.ui.view">
+        <field name="name">mail.activity.form.inherit</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_form_popup"/>
+        <field name="arch" type="xml">
+            <field name="summary" position="after">
+                <field name="manager" attrs="{'invisible': [('activity_category', '=', 'meeting')]}"></field>
+                <field name="supervisor" attrs="{'invisible': [('activity_category', '=', 'meeting')]}"></field>
+            </field>
+            <xpath expr="//sheet/group[3]/group[2]" position="replace">
+              <group>
+                    <field name="date_deadline"/>
+                    <field name="date_completion" string="Completed Date" attrs="{'invisible': [('date_completion','=',False)]}"/>
+                    <field name="user_ids" widget="many2many_tags" domain="[('share', '=', False)]" attrs="{'invisible': [('activity_category', '=', 'meeting')]}" groups="bi_all_in_one_schedule_activity.group_multi_user_activity"/>
+                    <field name="company" groups="base.group_multi_company" attrs="{'invisible': [('activity_category', '=', 'meeting')]}"></field>
+                    
+              </group>
+            </xpath>
+            <xpath expr="//sheet/group[3]/group[2]" position="after">
+                <group name="user_id" groups="bi_all_in_one_schedule_activity.group_multi_user_activity">
+                    <div class="user_id" style="display:none;">
+                        <field name="user_id"/>
+                        
+                    </div>
+                </group>
+            </xpath>
+            <data>
+                <field name="user_ids" position="after">
+                    <field name="activity_tags_id" widget="many2many_tags" readonly='False'/>
+                    <field name="res_model_id"/>
+                    <field name="res_model"/>
+                    <field name="res_id" />
+                    <field name="partner_id"/>
+                    <field name="activity_feedback"/>
+                </field>
+            </data>         
+
+            <xpath expr="//footer" position="attributes">
+                <attribute name="attrs">{'invisible': [('date_completion','!=',False)]}</attribute>
+            </xpath>
+            <xpath expr="//sheet/group" position="before">
+                <button class="btn btn-secondary pull-right" string="Active" icon="fa-check-circle" attrs="{'invisible': ['|',('id','=',False),('date_completion','!=',False)]}"></button>
+                <button class="btn btn-danger pull-right" string="Archived" icon="fa-archive" attrs="{'invisible': ['|',('id','=',False),('date_completion','=',False)]}"></button>
+            </xpath>
+            <xpath expr="//button[@special='cancel']" position="attributes">
+                  <attribute name="style">display:none;</attribute>
+            </xpath>
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button class="oe_stat_button" string="Origin" name="redirect_origin" type="object" icon="fa-sun-o" attrs="{'invisible': [('id','=',False)]}"></button>
+                    <button name="action_cancel"  class="btn-primary" string="Cancel" type="object" ></button>
+                    <!-- <button name="action_cancel"  type="object" string="Cancel"/> -->
+                    <field name="state" widget="statusbar" statusbar_visible="overdue,today,planned,done,cancelled"/>
+                </header>
+            </xpath>
+            <field name="note" position="after">
+                <group string="Other information" attrs="{'invisible': ['|',('id','=',False),('date_completion','=',False)]}">
+                    <field name="res_model_id"/>
+                    <field name="res_name"/>
+                </group>
+            </field>
+        </field>
+    </record>
+
+    <record id="user_id_disable_activity_inherit" model="ir.ui.view">
+        <field name="name">disable_user_mail_activity_form_inherit</field>
+        <field name="model">mail.activity</field>
+        <field name="key">bi_all_in_one_schedule_activity.user_id_disable_activity_inherit</field>
+        <field name="inherit_id" ref="bi_all_in_one_schedule_activity.mail_activity_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group[3]/group[2]" position="after">
+                <group name="user_id">
+                    <field name="user_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mail_activity_search_view" model="ir.ui.view">
+        <field name="name">mail.activity.search</field>
+        <field name="model">mail.activity</field>
+        <field name="arch" type="xml">
+            <search string="Activity">
+                <filter name="active" string="Activity History" domain="[('active','=',False)]"/>
+                <filter name="user_id" string="My Activity" domain="[('user_id', '=', uid)]"/>
+                <filter name="tags_id" string="Activity Tags" domain="[('activity_tags_id', '=' ,'self')]"/>
+                <field name="activity_tags_id" string="Activity Tags" filter_domain="[('activity_tags_id','ilike', self)]"/>
+                <separator/>
+                <filter name="date_deadline" string="Late Activities" domain="[('date_deadline','&lt;',context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="date_deadline" string="Today Activities" domain="[('date_deadline','=',context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="date_deadline" string="Future Activities" domain="[('date_deadline','&gt;',context_today().strftime('%Y-%m-%d'))]"/>
+
+                <group expand="1" string="Group By">
+                    <filter string="Deadline" name="date_deadline" context="{'group_by':'date_deadline'}"/>
+                    <filter string="Activity Type" name="activity_type_id" context="{'group_by':'activity_type_id'}"/>
+                    <filter string="Company" name="company" context="{'group_by':'company'}" groups="base.group_multi_company"/>
+                    <filter string="Created By" name="create_uid" context="{'group_by':'create_uid'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="activity_dashboard_views" model="ir.actions.act_window">
+        <field name="name">My Activity</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">tree,form,calendar,kanban,pivot,graph</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+    </record>
+
+    <record id="activity_dashboard_filtered_supervisor_views" model="ir.actions.act_window">
+        <field name="name">My Team Activity</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">tree,form,calendar,kanban,pivot,graph</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="domain">[('supervisor', '=', uid)]</field>
+    </record>
+
+    <record id="activity_dashboard_filtered_manager_views" model="ir.actions.act_window">
+        <field name="name">My Team Activity</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">tree,form,calendar,kanban,pivot,graph</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="domain">[('manager', '=', uid)]</field>
+    </record>
+
+    <record id="activity_dashboard_filtered_all_activity_views" model="ir.actions.act_window">
+        <field name="name">All Activity</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">tree,form,calendar,kanban,pivot,graph</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="domain">['|','|','|','|',('manager', '=', uid),('manager', '=', False),('supervisor', '=', uid), ('supervisor', '=', False),('user_id', '=', uid)]</field>
+    </record>
+
+    <record id="activity_history_views" model="ir.actions.act_window">
+        <field name="name">Activity History</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">tree,form,calendar,kanban,pivot,graph</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="domain">[('active','=',False)]</field>
+    </record>
+
+    <record id="activity_reporting_views" model="ir.actions.act_window">
+        <field name="name">Reporting</field>
+        <field name="res_model">mail.activity</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <record id="action_activity_tags_views" model="ir.actions.act_window">
+        <field name="name">Activity Tags</field>
+        <field name="res_model">activity.tags</field>
+        <field name="view_mode">tree,form</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="domain">[('activity_tags_id','=',False)]</field>
+    </record>
+
+
+    <!-- Activity Dashboard -->
+    <record id="activity_dashboard" model="ir.actions.client">
+        <field name="name">Activity Dashboard</field>
+        <field name="tag">activity_dashboard</field>
+    </record>
+
+    <record id="ir_actions_server_activity_dashboard" model="ir.actions.server">
+        <field name="name">Activity: Dashboard</field>
+        <field name="model_id" ref="mail.model_mail_activity"/>
+        <field name="state">code</field>
+        <field name="code">action = model.action_activity_dashboard_redirect()</field>
+    </record>
+
+    <record id="action_activity_dashboard" model="ir.actions.act_url">
+        <field name="name">Activity</field>
+        <field name="url">/</field>
+        <field name="target">self</field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_activity_kanban_view">
+        <field name="name">mail.activity.view.kanban</field>
+        <field name="model">mail.activity</field>
+        <field name="arch" type="xml">
+            <kanban class="o_mail_activity_kanban">
+                <field name="id"/>
+                <field name="res_name"/>
+                <field name="activity_type_id"/>
+                <field name="user_id"/>
+                <field name="date_deadline"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_mail_activity_kanban">
+                            <img class="o_kanban_image_inner_pic" t-if="record.user_id.raw_value" t-att-alt="record.user_id" t-att-src="kanban_image('res.users', 'image_128', record.user_id.raw_value)"/>
+                            <div class="oe_kanban_details ml16">
+                                <strong class="o_kanban_record_title oe_activity_heading"><field name="res_name"/></strong>
+                                <div class="o_kanban_tags_section oe_kanban_activity_categories"/>
+                                <ul>
+                                    <li t-if="record.activity_type_id"><field name="activity_type_id"/></li>
+                                    <li t-if="record.user_id"><field name="user_id"/></li>
+                                    <li t-if="record.company"><field name="company" groups="base.group_multi_company"/></li>
+                                    <li t-if="record.date_deadline"><field name="date_deadline"/></li>
+                                </ul>
+                                <div class="oe_kanban_partner_links"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <menuitem id="avtivity_management_main_menu" name="Activity Management" action="bi_all_in_one_schedule_activity.ir_actions_server_activity_dashboard"/>
+    <!-- Dashboard menu -->
+    <menuitem id="activity_management_dashboard_menu" name="Dashboard" parent="bi_all_in_one_schedule_activity.avtivity_management_main_menu"
+              action="bi_all_in_one_schedule_activity.ir_actions_server_activity_dashboard" sequence="1"/>
+    <!-- Activity menu -->
+    <menuitem id="activity_management_activity" name="Activity" parent="bi_all_in_one_schedule_activity.avtivity_management_main_menu"  sequence="2"/>
+    <!-- Activity History menu -->
+    <menuitem id="activity_management_activity_history" name="Activity History" parent="bi_all_in_one_schedule_activity.avtivity_management_main_menu"
+              action="bi_all_in_one_schedule_activity.activity_history_views" sequence="3"/>
+    <!-- Reporting menu -->
+    <menuitem id="activity_management_reporting" name="Reporting" parent="bi_all_in_one_schedule_activity.avtivity_management_main_menu"
+              action="bi_all_in_one_schedule_activity.activity_reporting_views" sequence="4"/>
+    <!-- Activity Submenu -->
+    <menuitem id="all_avtivity_manager_menu" name="All Activity" parent="bi_all_in_one_schedule_activity.activity_management_activity"
+              action="bi_all_in_one_schedule_activity.activity_dashboard_filtered_all_activity_views" groups="bi_all_in_one_schedule_activity.activity_manager" sequence="1"/>
+    <menuitem id="my_avtivity_menu" name="My Activity" parent="bi_all_in_one_schedule_activity.activity_management_activity"
+              action="bi_all_in_one_schedule_activity.activity_dashboard_views"/>
+    <menuitem id="my_avtivity_tags_menu" name="Acitivity Tags" parent="bi_all_in_one_schedule_activity.activity_management_activity" action="bi_all_in_one_schedule_activity.action_activity_tags_views"/>
+    <menuitem id="my_team_avtivity_menu" name="My Team Activity" parent="bi_all_in_one_schedule_activity.activity_management_activity"
+              action="bi_all_in_one_schedule_activity.activity_dashboard_filtered_supervisor_views" groups="bi_all_in_one_schedule_activity.activity_supervisor"/>
+    <menuitem id="my_team_avtivity_manager_menu" name="My Team Activity" parent="bi_all_in_one_schedule_activity.activity_management_activity"
+              action="bi_all_in_one_schedule_activity.activity_dashboard_filtered_manager_views" groups="bi_all_in_one_schedule_activity.activity_manager"/>
+
+    <!--  Add company in calender view popup  -->
+    <record id="mail_activity_view_calendar_inherit" model="ir.ui.view">
+        <field name="name">mail.activity.calender.inherit</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_calendar"/>
+        <field name="arch" type="xml">
+            <field name="summary" position="after">
+                <field name="company" groups="base.group_multi_company"></field>
+            </field>
+        </field>
+    </record>
+
+</odoo>

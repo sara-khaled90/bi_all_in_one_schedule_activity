@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_activity_admin,mail.activity.admin,model_mail_activity,base.group_system,1,1,1,1
+access_activity_manager,mail.activity.manager,model_mail_activity,bi_all_in_one_schedule_activity.activity_manager,1,1,0,1
+access_activity_supervisor,mail.activity.supervisor,model_mail_activity,bi_all_in_one_schedule_activity.activity_supervisor,1,1,0,1
+access_activity_all,mail.activity.all,model_mail_activity,,1,0,0,0
+access_activity_tags,access_activity_tags,model_activity_tags,base.group_user,1,1,1,1

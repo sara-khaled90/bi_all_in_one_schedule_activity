@@ -1,0 +1,10 @@
+1) Version: 13.0.0.1 | Date : 12/02/2021
+-->  Fixed the traceback issue in general settings.
+-->  Fixed the issue of days can not edit.
+
+2) Version: 13.0.0.2 | Date : 8/02/2022
+-- add activity tag Feature for module
+-- add new field "feedback" for direct add feedback in activity  for module
+-- add create button for direct create activity  for module
+-- add new stage "cancel" in header  and add cacncel button functionality to change cancelled stage for module
+-- add activity tags Filter by tag name in Search bar 

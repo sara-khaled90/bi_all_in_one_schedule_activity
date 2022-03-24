@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_multi_user_activity" model="res.groups">
+            <field name="name">Manage multi users in Activity</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="activity_supervisor" model="res.groups">
+            <field name="name">Activity Supervisor</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="activity_manager" model="res.groups">
+            <field name="name">Activity Manager</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="mail_activity_rule_supervisor_user" model="ir.rule">
+            <field name="name">mail.activity: supervisor: read/write/unlink own and assigned (created or assigned)</field>
+            <field name="model_id" ref="model_mail_activity"/>
+            <field name="domain_force">['|', '|', ('supervisor', '=', user.id), ('user_id', '=', user.id), ('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('bi_all_in_one_schedule_activity.activity_supervisor'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+        <record id="mail_activity_rule_user" model="ir.rule">
+            <field name="name">mail.activity: user: write/unlink only (created or assigned)</field>
+            <field name="model_id" ref="model_mail_activity"/>
+            <field name="domain_force">['|', ('user_id', '=', user.id), ('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+        <record id="mail_activity_rule_manager_user" model="ir.rule">
+            <field name="name">mail.activity: Manager: read/write/unlink all activity (created or assigned)</field>
+            <field name="model_id" ref="model_mail_activity"/>
+            <field name="domain_force">['|', '|', ('manager', '=', user.id), ('user_id', '=', user.id), ('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('bi_all_in_one_schedule_activity.activity_manager'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <record id="mail_activity_rule_multi_company" model="ir.rule">
+            <field name="name">mail.activity: Multi company</field>
+            <field name="model_id" ref="model_mail_activity"/>
+            <field name="global" eval="True"/>
+            <field name="domain_force">[('company', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

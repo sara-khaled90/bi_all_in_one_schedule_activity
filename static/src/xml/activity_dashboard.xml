@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="bi_all_in_one_schedule_activity.ActivityDashboardMain">
+        <div class="o_dashboards">
+            <div class="container-fluid o_activity_dashboard">
+                <t t-call="bi_all_in_one_schedule_activity.dashboard_header"/>
+                <t t-call="bi_all_in_one_schedule_activity.dashboard_content"/>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="bi_all_in_one_schedule_activity.dashboard_header">
+        <div class="row o_dashboard_common"/>
+    </t>
+
+    <t t-name="bi_all_in_one_schedule_activity.dashboard_content">
+        <link rel="stylesheet" href="/bi_all_in_one_schedule_activity/static/src/css/bi_all_in_one_schedule_activity_backend.css"/>
+        <div class="o_activity_dashboard_content">
+            <h2 class="mt64 mb32 dashboard_data_h2">Activity Dashboard</h2>
+            <div class="col-md-12 row activity_content_main">
+                <div class="col-md-3">
+                    <div class="activity_block">
+                        <div class="activity_block_left nth1">
+                            <i class="fa fa-trophy"></i>
+                        </div>
+                        <div class="activity_block_right">
+                            <a class="a_name filterActivities" data-activity_type="Today’s Schedule Activity" data-domain="[('date_deadline','=',context_today().strftime('%Y-%m-%d'))]">Today activity</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="activity_block">
+                        <div class="activity_block_left nth2">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <div class="activity_block_right">
+                            <a class="a_name filterActivities" data-activity_type="Late Schedule Activity" data-domain="[('date_deadline','&lt;',context_today().strftime('%Y-%m-%d'))]">Late activity</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="activity_block">
+                        <div class="activity_block_left nth3">
+                            <i class="fa fa-superpowers"></i>
+                        </div>
+                        <div class="activity_block_right">
+                            <a class="a_name filterActivities" data-activity_type="Future Schedule Activity"  data-domain="[('date_deadline','&gt;',context_today().strftime('%Y-%m-%d'))]">Future activity</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="activity_block">
+                        <div class="activity_block_left nth4">
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <div class="activity_block_right">
+                            <a class="a_name filterActivities" data-activity_type="Activity History" data-domain="[('active','=',False)]">History</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <t t-if="widget.activity_count != 0">
+                <t t-if="widget.activity_models">
+                    <h2 class="mt32 mb32 dashboard_data_h2">Filter Activity By Model</h2>
+                    <div class="col-md-12 row activity_models_main">
+                        <t t-foreach="widget.activity_models" t-as="activity_model">
+                            <div class="col-md-4">
+                                <div class="activity_model_block">
+                                    <p class="act_model_name" t-esc="activity_model.name"></p>
+                                    <div class="activity_model_block_left">
+                                        <input type="hidden" class="res_model" name="res_model" t-att-value="activity_model.model"></input>
+                                        <p class="filterByModel" data-domain_filter="today" data-activity_type_name="Today Activity"><i class="fa fa-calendar"></i> <span>Today Activity</span></p>
+                                        <p class="filterByModel" data-activity_type="email" data-activity_type_name="Today Email Activity"><i class="fa fa-envelope"></i> <span>Today Email Activity</span></p>
+                                        <p class="filterByModel" data-activity_type="call" data-activity_type_name="Today Call Activity"><i class="fa fa-phone"></i> <span>Today Call Activity</span></p>
+                                    </div>
+                                    <div class="activity_model_block_right">
+                                        <p class="filterByModel" data-date="tomorrow" data-activity_type_name="Tomorrow Activity"><i class="fa fa-calendar"></i> <span>Tomorrow Activity</span></p>
+                                        <p class="filterByModel" data-domain_filter="overdue" data-activity_type_name="Late Activity"><i class="fa fa-clock-o"></i> <span>Late Activity</span></p>
+                                        <p class="filterByModel" data-domain_filter="planned" data-activity_type_name="Future Activity"><i class="fa fa-globe"></i> <span>Future Activity</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </div>
+    </t>
+
+</templates>

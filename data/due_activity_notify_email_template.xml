@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<odoo>
+		<record id="due_activity_notify_email_template" model="mail.template">
+            <field name="name">Activity Due Notification</field>
+			<field name="email_from">${(user.email or '') |safe}</field>
+            <field name="subject">Activity Due Notification</field>
+            <field name="email_to">${(user.email or '')|safe}</field>
+            <field name="lang">${object.lang}</field>
+            <field name="model_id" ref="mail.model_mail_activity" />
+            <field name="auto_delete" eval="True"/>
+
+			<field name="body_html">
+				<![CDATA[
+					<div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); ">
+						<p>Dear ${object.user_id.name},</p>
+						<p>
+							Your Activity # ${object.activity_type_id.name} ${object.summary}. scheduled on ${object.summary} is due.
+							% if object.note:
+								Note : ${object.object.note}
+							% endif
+							Thank you
+						</p>
+						<br/>
+					</div>
+				]]>
+			</field>
+		</record>
+</odoo>
